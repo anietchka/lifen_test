@@ -40,6 +40,10 @@ class Clock
     self
   end
 
+  def ==(other_clock)
+    to_s == other_clock.to_s
+  end
+
   private
 
   def addition(clock)
@@ -230,37 +234,37 @@ class ClockTest < Minitest::Test
   end
 
   def test_subtract_across_midnight
-    skip
+    # skip
     clock = Clock.new(hour: 0, minute: 3)
     assert_equal "23:59", (clock - Clock.new(minute: 4)).to_s
   end
 
   def test_subtract_more_than_two_hours
-    skip
+    # skip
     clock = Clock.new(hour: 0, minute: 0)
     assert_equal "21:20", (clock - Clock.new(minute: 160)).to_s
   end
 
   def test_subtract_more_than_two_hours_with_borrow
-    skip
+    # skip
     clock = Clock.new(hour: 6, minute: 15)
     assert_equal "03:35", (clock - Clock.new(minute: 160)).to_s
   end
 
   def test_subtract_more_than_one_day
-    skip
+    # skip
     clock = Clock.new(hour: 5, minute: 32)
     assert_equal "04:32", (clock - Clock.new(minute: 1500)).to_s
   end
 
   def test_subtract_more_than_two_days
-    skip
+    # skip
     clock = Clock.new(hour: 2, minute: 20)
     assert_equal "00:20", (clock - Clock.new(minute: 3000)).to_s
   end
 
   def test_clocks_with_same_time
-    skip
+    # skip
     clock1 = Clock.new(hour: 15, minute: 37)
     clock2 = Clock.new(hour: 15, minute: 37)
     assert_equal clock1, clock2
