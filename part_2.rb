@@ -35,6 +35,11 @@ class Clock
     self
   end
 
+  def -(clock)
+    @minutes -= clock.minutes
+    self
+  end
+
   private
 
   def hours_format
@@ -179,31 +184,31 @@ class ClockTest < Minitest::Test
   end
 
   def test_add_more_than_two_hours_with_carry
-    skip
+    # skip
     clock = Clock.new(hour: 0, minute: 45)
     assert_equal "03:25", (clock + Clock.new(minute: 160)).to_s
   end
 
   def test_add_across_midnight
-    skip
+    # skip
     clock = Clock.new(hour: 23, minute: 59)
     assert_equal "00:01", (clock + Clock.new(minute: 2)).to_s
   end
 
   def test_add_more_than_one_day
-    skip
+    # skip
     clock = Clock.new(hour: 5, minute: 32)
     assert_equal "06:32", (clock + Clock.new(minute: 1500)).to_s
   end
 
   def test_add_more_than_two_days
-    skip
+    # skip
     clock = Clock.new(hour: 1, minute: 1)
     assert_equal "11:21", (clock + Clock.new(minute: 3500)).to_s
   end
 
   def test_subtract_minutes
-    skip
+    # skip
     clock = Clock.new(hour: 10, minute: 3)
     assert_equal "10:00", (clock - Clock.new(minute: 3)).to_s
   end
