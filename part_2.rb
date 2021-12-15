@@ -26,8 +26,12 @@ class Clock
     @minutes % MINUTES_IN_HOUR
   end
 
+  def hours
+    @minutes / MINUTES_IN_HOUR % HOURS_IN_DAY
+  end
+
   def +(clock)
-    @minutes += clock.minutes
+    @minutes += clock.hours * MINUTES_IN_HOUR + clock.minutes
     self
   end
 
@@ -163,13 +167,13 @@ class ClockTest < Minitest::Test
   end
 
   def test_add_to_next_hour
-    skip
+    # skip
     clock = Clock.new(hour: 0, minute: 45)
     assert_equal "01:25", (clock + Clock.new(minute: 40)).to_s
   end
 
   def test_add_more_than_one_hour
-    skip
+    # skip
     clock = Clock.new(hour: 10, minute: 0)
     assert_equal "11:01", (clock + Clock.new(minute: 61)).to_s
   end
