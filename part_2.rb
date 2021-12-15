@@ -11,14 +11,15 @@ require 'minitest/autorun'
 class Clock
   attr_reader :hour, :minute
   HOURS_IN_DAY = 24
+  MINUTES_IN_HOUR = 60
 
-
-  def initialize(hour: 0)
+  def initialize(hour: 0, minute:0)
     @hours = hour
+    @minutes = minute
   end
 
   def to_s
-    "#{hours_format}:00"
+    "#{hours_format}:#{minutes_format}"
   end
 
   private
@@ -26,6 +27,11 @@ class Clock
   def hours_format
     hour = @hours % HOURS_IN_DAY
     clock_format(hour)
+  end
+
+  def minutes_format
+    minute = @minutes % MINUTES_IN_HOUR
+    clock_format(minute)
   end
 
   def clock_format(time)
