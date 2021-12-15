@@ -25,7 +25,7 @@ class Clock
   private
 
   def hours_format
-    hour = @hours % HOURS_IN_DAY
+    hour = (@hours + @minutes/MINUTES_IN_HOUR)% HOURS_IN_DAY
     clock_format(hour)
   end
 
@@ -52,22 +52,22 @@ class ClockTest < Minitest::Test
   end
 
   def test_midnight_is_zero_hours
-    skip
+    # skip
     assert_equal "00:00", Clock.new(hour: 24).to_s
   end
 
   def test_hour_rolls_over
-    skip
+    # skip
     assert_equal "01:00", Clock.new(hour: 25).to_s
   end
 
   def test_hour_rolls_over_continuously
-    skip
+    # skip
     assert_equal "04:00", Clock.new(hour: 100).to_s
   end
 
   def test_sixty_minutes_is_next_hour
-    skip
+    # skip
     assert_equal "02:00", Clock.new(hour: 1, minute: 60).to_s
   end
 
