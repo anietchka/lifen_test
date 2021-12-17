@@ -15,8 +15,15 @@
 class AssetsController < ApplicationController
   before_action :find_asset, only: [:activate, :deactivate]
   def index
+    # Je pars du principe que le model Asset a un attribut full_size qui est defini dans une methode
+    # par sa longueur et sa largeur, lors de la création de l'Asset
     @assets = Asset.where(active: true).where('created_at > ?', 2.days.ago)
-    render json: assets_as_json(@assets)
+    render json: @assets.to_json(
+        :only => [:title, :full_size],
+        :include => {
+          :parent => {only: [:id]},
+          :author => {only: [:name]}
+        })
   end
 
   def activate
@@ -30,17 +37,6 @@ class AssetsController < ApplicationController
   end
 
   private
-
-  def assets_as_json(assets)
-    assets.collect do |asset|
-      {
-        title: asset.title,
-        full_size: "#{asset.width}x#{asset.height}px",
-        parent_id: asset.parent.id,
-        author: asset.author.name
-      }
-    end.to_json
-  end
 
   def find_asset
     @asset = Asset.find(params[:id])
