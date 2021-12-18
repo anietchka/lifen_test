@@ -10,6 +10,7 @@ require 'minitest/autorun'
 
 class Clock
   attr_reader :hour, :minute
+
   HOURS_IN_DAY = 24
   MINUTES_IN_HOUR = 60
 
